@@ -12,6 +12,19 @@ First, if you haven't already, install uv:
 pip install uv
 ```
 
+### Update to use Bedrock
+
+Update crewAI dependency to include bedrock support in `pyproject.toml`:
+
+~"crewai[bedrock,tools]==1.9.3",~
+
+Note: CrewAI 1.x+ has tool calling compatibility issues. Needed to downgrade to 0.150.0 for this project to work. I also needed to downgrade the Claude model to match.
+
+```toml
+"crewai[bedrock,tools]>=0.150.0,<1.0.0",
+    "boto3>=1.34,<2.0",
+```
+
 Next, navigate to your project directory and install the dependencies:
 
 (Optional) Lock the dependencies and install them by using the CLI command:
@@ -20,7 +33,7 @@ crewai install
 ```
 ### Customizing
 
-**Add your `OPENAI_API_KEY` into the `.env` file**
+**Add your `AWS Credentials` into the `.env` file**. CrewAI does not appear to support Bedrock API Keys.
 
 - Modify `src/financial_researcher/config/agents.yaml` to define your agents
 - Modify `src/financial_researcher/config/tasks.yaml` to define your tasks
